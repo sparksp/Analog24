@@ -65,27 +65,25 @@ class SlowWatchView extends Ui.WatchFace {
         }
     }
 
-    //! Distance from the edge the hand stops
-    hidden const HAND_INSET = 3;
 
     //! Draw the hand
     hidden function drawHand(dc) {
         var angle = timeAngle();
-        var length = radius - HAND_INSET;
-        var cos = Math.cos(angle);
-        var sin = Math.sin(angle);
-        var pointX = centerX + (cos * length);
-        var pointY = centerY + (sin * length);
+        var cos = Math.cos(angle) * radius;
+        var sin = Math.sin(angle) * radius;
+
+        var rangle = angle + (Math.PI / 2);
+        var rcos = Math.cos(rangle) * 3;
+        var rsin = Math.sin(rangle) * 3;
 
         dc.setColor(Gfx.COLOR_ORANGE, Gfx.COLOR_ORANGE);
         dc.setPenWidth(1);
-        dc.fillCircle(
-            centerX, centerY, 4
-        );
-        dc.drawLine(
-            centerX, centerY,
-            pointX, pointY
-        );
+        dc.fillPolygon([
+            [centerX + cos, centerY + sin],
+            [centerX + rcos, centerY + rsin],
+            [centerX - (cos / radius * 6), centerY - (sin / radius * 6)],
+            [centerX - rcos, centerY - rsin]
+        ]);
     }
 
     hidden const MINUTES_PER_HOUR = 60.0;
