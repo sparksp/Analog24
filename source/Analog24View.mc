@@ -2,9 +2,13 @@ using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 using Toybox.System as Sys;
 
-class SlowWatchView extends Ui.WatchFace {
+class Analog24View extends Ui.WatchFace {
 
     hidden var radius, centerX, centerY;
+
+    function initialize() {
+        WatchFace.initialize();
+    }
 
     function onLayout(dc) {
         centerX = dc.getWidth() / 2;
