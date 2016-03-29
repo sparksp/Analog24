@@ -78,14 +78,15 @@ class SlowWatchView extends Ui.WatchFace {
         var pointY = centerY + (sin * length);
 
         dc.setColor(Gfx.COLOR_ORANGE, Gfx.COLOR_ORANGE);
-        dc.setPenWidth(1);
-        dc.fillCircle(
-            centerX, centerY, 4
-        );
+        dc.setPenWidth(3);
         dc.drawLine(
             centerX, centerY,
             pointX, pointY
         );
+        dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_BLACK);
+        dc.fillCircle(centerX, centerY, 4);
+        dc.setColor(Gfx.COLOR_ORANGE, Gfx.COLOR_ORANGE);
+        dc.drawCircle(centerX, centerY, 4);
     }
 
     hidden const MINUTES_PER_HOUR = 60.0;
